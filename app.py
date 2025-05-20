@@ -6,7 +6,8 @@ from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
-from langchain.chat_models import OpenAI
+from langchain.chat_models import ChatOpenAI
+from htmpTemplates import css, bot_template, user_template
 import os
 
 
@@ -39,7 +40,7 @@ def get_vectorstore(text_chunks):
 
 def get_conversation_chain(vectorstore):
     load_dotenv()
-    llm = OpenAI(
+    llm = ChatOpenAI(
         api_key=os.getenv("OPENAI_API_KEY"),
         base_url=os.getenv("OPENAI_API_BASE_URL"),
     )
@@ -56,11 +57,16 @@ def main():
     load_dotenv()
     st.set_page_config(page_title="Chat with your PDF", page_icon=":books:")
 
+    st.write(css, unsafe_allow_html=True)
+
     if "conversation" not in st.session_state:
         st.session_state.conversation = None
 
     st.header("Chat with your PDF :books:")
     st.text_input("Ask a question about your documents:")
+
+    st.write(user_template.replace("{{MSG}}", "Hello, Robot!"), unsafe_allow_html=True)
+    st.write(bot_template.replace("{{MSG}}", "Hello, Human!"), unsafe_allow_html=True)
 
     with st.sidebar:
         st.subheader("Your documents")
