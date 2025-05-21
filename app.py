@@ -6,7 +6,7 @@ from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
-from langchain.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
 from htmpTemplates import css, bot_template, user_template
 import os
 
@@ -39,10 +39,10 @@ def get_vectorstore(text_chunks):
     return vectorstore
 
 def get_conversation_chain(vectorstore):
-    load_dotenv()
+    #load_dotenv()
     llm = ChatOpenAI(
-        api_key=os.getenv("OPENAI_API_KEY"),
-        base_url=os.getenv("OPENAI_API_BASE_URL"),
+        base_url="https://proxy.merkulov.ai",#os.getenv("OPENAI_API_BASE_URL"),
+        api_key="sk-06emc8NHjoFndfxgIYH7tw"#os.getenv("OPENAI_API_KEY"),
     )
 
     memory = ConversationBufferMemory(memory_key='chat_history', return_messages=True)
@@ -53,8 +53,13 @@ def get_conversation_chain(vectorstore):
     )
     return conversation_chain
 
+
+def handle_userinput(user_question):
+    response = st.session_state.conversation({'question': user_question})
+    st.write(response)
+
+
 def main():
-    load_dotenv()
     st.set_page_config(page_title="Chat with your PDF", page_icon=":books:")
 
     st.write(css, unsafe_allow_html=True)
@@ -63,7 +68,9 @@ def main():
         st.session_state.conversation = None
 
     st.header("Chat with your PDF :books:")
-    st.text_input("Ask a question about your documents:")
+    user_question = st.text_input("Ask a question about your documents:")
+    if user_question:
+        handle_userinput(user_question)
 
     st.write(user_template.replace("{{MSG}}", "Hello, Robot!"), unsafe_allow_html=True)
     st.write(bot_template.replace("{{MSG}}", "Hello, Human!"), unsafe_allow_html=True)
