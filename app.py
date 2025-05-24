@@ -41,8 +41,8 @@ def get_vectorstore(text_chunks):
 def get_conversation_chain(vectorstore):
     #load_dotenv()
     llm = ChatOpenAI(
-        base_url="https://proxy.merkulov.ai",#os.getenv("OPENAI_API_BASE_URL"),
-        api_key="sk-06emc8NHjoFndfxgIYH7tw"#os.getenv("OPENAI_API_KEY"),
+        base_url=os.getenv("OPENAI_API_BASE_URL"),
+        api_key=os.getenv("OPENAI_API_KEY")
     )
 
     memory = ConversationBufferMemory(memory_key='chat_history', return_messages=True)
