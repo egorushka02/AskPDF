@@ -16,6 +16,6 @@ def get_conversation_chain(vectorstore: FAISS):
     )
     return ConversationalRetrievalChain.from_llm(
         llm=llm,
-        retirever=vectorstore.as_retriever(),
+        retriever=vectorstore.as_retriever(),
         memory=memory
     )
