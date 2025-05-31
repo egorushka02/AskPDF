@@ -38,17 +38,3 @@ Create a `.env` file in the root directory and add your OpenAI API key:
 OPENAI_API_KEY=your_api_key_here
 OPENAI_API_BASE_URL=your_base_url
 ```
-
-### Usage
-1. Run the application:
-```bash
-streamlit run app.py
-```
-
-2. Open your web browser and navigate to the provided local URL (usually http://localhost:8501)
-
-3. Upload your PDF documents using the sidebar
-
-4. Click "Process" to analyze your documents
-
-5. Start asking questions about your documents in the chat interface
