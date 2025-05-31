@@ -39,7 +39,7 @@ def get_vectorstore(text_chunks):
     return vectorstore
 
 def get_conversation_chain(vectorstore):
-    #load_dotenv()
+    load_dotenv()
     llm = ChatOpenAI(
         base_url=os.getenv("OPENAI_API_BASE_URL"),
         api_key=os.getenv("OPENAI_API_KEY")
