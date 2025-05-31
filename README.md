@@ -24,7 +24,6 @@ AskPDF is an interactive web application that allows you to chat with your PDF d
 1. Clone the repository:
 ```bash
 git clone https://github.com/egorushka02/AskPDF.git
-cd AskPDF
 ```
 
 2. Install the required dependencies:
