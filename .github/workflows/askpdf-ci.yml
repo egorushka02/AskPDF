@@ -1,4 +1,4 @@
-name: Test Project
+name: CI ASKPdf
 
 on: [push, pull_request]
 jobs:
