@@ -6,4 +6,4 @@ meta:
 
 run:
   command: uvicorn app.main:app --reload --port 8000
-  containerPort: 5000
+  containerPort: 8000
