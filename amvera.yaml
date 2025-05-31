@@ -1,0 +1,9 @@
+meta:
+  environment: python
+  toolchain:
+    name: pip
+    version: 3.11
+
+run:
+  command: uvicorn app.main:app --reload --port 8000
+  containerPort: 5000
